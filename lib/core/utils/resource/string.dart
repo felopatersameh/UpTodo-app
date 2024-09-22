@@ -1,0 +1,1 @@
+class AppStrings {  static const String indexNamePage = "Index";  static const String calenderNamePage = "Calender";  static const String addNamePage = "  ";  static const String focusNamePage = "Focus";  static const String profileNamePage = "Profile";}
