@@ -1,0 +1,1 @@
+class TaskModel {  final String title;  final String time;  final bool isToday;  final String? type;  final int? flag;  TaskModel(this.title, this.time, this.isToday, this.type, this.flag);}
