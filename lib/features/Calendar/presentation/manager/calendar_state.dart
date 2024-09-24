@@ -1,1 +1,1 @@
-part of 'calendar_cubit.dart';@immutablesealed class CalendarState {}final class CalendarInitial extends CalendarState {}
+part of 'calendar_cubit.dart';@immutablesealed class CalendarState {}class CalendarInitial extends CalendarState {}class CalendarSucceed extends CalendarState {  final List<TaskModel> model;  CalendarSucceed(this.model);}class CalendarLoading extends CalendarState {}

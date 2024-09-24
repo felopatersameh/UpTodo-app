@@ -1,0 +1,1 @@
+import 'package:flutter/material.dart';class PriorityModel {  final IconData flag = Icons.flag_outlined;  final int number;  PriorityModel(this.number);}
