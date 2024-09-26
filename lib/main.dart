@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'core/Network/serves_locator.dart';
 import 'features/Calendar/presentation/manager/calendar_cubit.dart';
 
 import 'config/themes/theme.dart';
 import 'features/Layout/presentation/manager/app_cubit.dart';
 import 'features/Layout/presentation/pages/layout_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setup();
   runApp(const MyApp());
 }
 
@@ -21,7 +24,7 @@ class MyApp extends StatelessWidget {
           create: (context) => AppCubit(),
         ),
         BlocProvider(
-          create: (context) => CalendarCubit()..filterToday(),
+          create: (context) => CalendarCubit()..filter(),
         ),
       ],
       child: MaterialApp(
