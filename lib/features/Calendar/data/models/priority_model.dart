@@ -1,1 +1,1 @@
-import 'package:flutter/material.dart';class PriorityModel {  final IconData flag = Icons.flag_outlined;  final int number;  PriorityModel(this.number);}
+import 'package:flutter/material.dart';class PriorityModel {  final int number;  final IconData flag;  PriorityModel(this.number) : flag = Icons.flag_outlined;  factory PriorityModel.fromJson(Map<String, dynamic> json) {    return PriorityModel(json['number']);  }  Map<String, dynamic> toJson() {    return {      'number': number,    };  }}
