@@ -1,0 +1,1 @@
+class AppConstant {  static const String kFontIcon = "MaterialIcons";}
