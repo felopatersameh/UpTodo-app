@@ -6,7 +6,6 @@ import 'features/Calendar/presentation/manager/calendar_cubit.dart';
 import 'config/themes/theme.dart';
 import 'features/Layout/presentation/manager/app_cubit.dart';
 import 'features/Layout/presentation/pages/layout_screen.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setup();

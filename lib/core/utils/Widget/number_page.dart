@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'custom_row.dart';
 import '../resource/colors.dart';
 import '../resource/string.dart';
 import '../resource/styles.dart';
@@ -161,54 +162,28 @@ class _NumberPageState extends State<NumberPage> {
                     )
                   ],
                 ),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                      style: ButtonStyle(
-                        shape: WidgetStatePropertyAll(
-                          ContinuousRectangleBorder(),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        AppStrings.cancel,
-                        style: Styles.text16()
-                            .copyWith(color: AppColors.primaryColor),
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ButtonStyle(
-                          shape: WidgetStatePropertyAll(
-                              ContinuousRectangleBorder()),
-                          backgroundColor:
-                              WidgetStatePropertyAll(AppColors.primaryColor)),
-                      onPressed: () {
-                        if (timeFormat == "AM") {
-                          if (hour == 12) {
-                            hour = 0;
-                          }
-                        } else if (timeFormat == "PM") {
-                          if (hour != 12) {
-                            hour += 12;
-                          }
-                        }
-                        Navigator.pop(
-                          context,
-                          [hour, minute],
-                        );
-                      },
-                      child: Text(
-                        AppStrings.chooseTime,
-                        style: Styles.text16(),
-                      ),
-                    ),
-                  ],
-                ),
               ],
+            ),
+          ),
+          Expanded(
+            child: CustomRow(
+              name: AppStrings.chooseTime,
+              height: .05,
+              onTap: () {
+                if (timeFormat == "AM") {
+                  if (hour == 12) {
+                    hour = 0;
+                  }
+                } else if (timeFormat == "PM") {
+                  if (hour != 12) {
+                    hour += 12;
+                  }
+                }
+                Navigator.pop(
+                  context,
+                  [hour, minute],
+                );
+              },
             ),
           )
         ],
