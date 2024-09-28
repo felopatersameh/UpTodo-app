@@ -6,6 +6,8 @@ import 'features/Calendar/presentation/manager/calendar_cubit.dart';
 import 'config/themes/theme.dart';
 import 'features/Layout/presentation/manager/app_cubit.dart';
 import 'features/Layout/presentation/pages/layout_screen.dart';
+import 'features/User/presentation/manager/user_cubit.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setup();
@@ -24,6 +26,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CalendarCubit()..filter(),
+        ),
+        BlocProvider(
+          create: (context) => UserCubit(),
         ),
       ],
       child: MaterialApp(

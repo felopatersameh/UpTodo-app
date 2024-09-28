@@ -1,0 +1,1 @@
+part of 'user_cubit.dart';@immutablesealed class UserState {}final class UserInitial extends UserState {}final class UserUpdated extends UserState {  final UserAccountModel user;  UserUpdated(this.user);}class ImagePickedSuccess extends UserState {  final File image;  ImagePickedSuccess(this.image);}
