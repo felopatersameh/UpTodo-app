@@ -1,0 +1,1 @@
+class AppFormat {  static const String dateCompareTask = "E M";}
