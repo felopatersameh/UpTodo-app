@@ -1,0 +1,1 @@
+class AppMessages {  static const String succeed = "Succeed";  static const String addTask = "$succeed Add Task ";  static String customMessage(String message) => "the $message is required";}
