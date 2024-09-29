@@ -1,1 +1,1 @@
-class AppConstant {  static const String kFontIcon = "MaterialIcons";}
+class AppConstant {  static const String kFontIcon = "MaterialIcons";  static const String kImage =      "https://media.licdn.com/dms/image/v2/D4D03AQGIHg3PE0wjcA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1726179524118?e=1732752000&v=beta&t=f0MUj7TCf10fhAhrpDqGS-u5sbnsAj7cs6U4DObqV4U";}
