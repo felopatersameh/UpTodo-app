@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'custom_row.dart';
 import '../resource/colors.dart';
@@ -6,7 +7,9 @@ import '../resource/string.dart';
 import '../resource/styles.dart';
 
 class NumberPage extends StatefulWidget {
-  const NumberPage({super.key});
+  const NumberPage({super.key, this.dateTime});
+
+  final DateTime? dateTime;
 
   @override
   State<NumberPage> createState() => _NumberPageState();
@@ -16,6 +19,23 @@ class _NumberPageState extends State<NumberPage> {
   var hour = 0;
   var minute = 0;
   var timeFormat = "AM";
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.dateTime != null) {
+      hour = widget.dateTime!.hour;
+      minute = widget.dateTime!.minute;
+      if (hour >= 12) {
+        timeFormat = "PM";
+        if (hour > 12) {
+          hour -= 12;
+        }
+      } else {
+        timeFormat = "AM";
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,0 +1,1 @@
+import 'package:flutter/material.dart';PreferredSizeWidget defaultAppBar({required String title}) => AppBar(      title: Text(title),    );

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/Network/serves_locator.dart';
-import 'features/Calendar/presentation/manager/calendar_cubit.dart';
+import 'features/TaskManagement/ViewModel/AddTask/add_task_cubit.dart';
 
 import 'config/themes/theme.dart';
-import 'features/Layout/presentation/manager/app_cubit.dart';
-import 'features/Layout/presentation/pages/layout_screen.dart';
-import 'features/User/presentation/manager/user_cubit.dart';
+import 'features/Layout/View/Pages/layout_screen.dart';
+import 'features/User/ViewModel/user_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,10 +21,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AppCubit(),
-        ),
-        BlocProvider(
-          create: (context) => CalendarCubit()..filter(),
+          create: (context) => AddTaskCubit()..filter(),
         ),
         BlocProvider(
           create: (context) => UserCubit(),

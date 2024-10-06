@@ -1,0 +1,1 @@
+part of 'add_task_cubit.dart';@immutablesealed class AddTaskState {}class CalendarInitial extends AddTaskState {}class CalendarSucceed extends AddTaskState {  final List<TaskModel> model;  CalendarSucceed(this.model);}class CalendarLoading extends AddTaskState {}
