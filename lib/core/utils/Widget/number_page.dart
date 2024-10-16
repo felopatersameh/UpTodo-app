@@ -46,7 +46,7 @@ class _NumberPageState extends State<NumberPage> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Text(AppStrings.chooseTime, style: Styles.text16()),
+            child: Text(AppStrings.chooseTime, style: Styles.text16(context)),
           ),
           Divider(
             height: 5,
@@ -78,9 +78,9 @@ class _NumberPageState extends State<NumberPage> {
                             hour = value;
                           });
                         },
-                        textStyle: Styles.text16()
+                        textStyle: Styles.text16(context)
                             .copyWith(color: AppColors.gray1TextColor),
-                        selectedTextStyle: Styles.text24(),
+                        selectedTextStyle: Styles.text24(context),
                         decoration: const BoxDecoration(
                           border: Border(
                               top: BorderSide(
@@ -92,7 +92,7 @@ class _NumberPageState extends State<NumberPage> {
                     ),
                     Text(
                       ":",
-                      style: Styles.text20AppBAr(),
+                      style: Styles.text20AppBar(context),
                     ),
                     Container(
                       margin: EdgeInsets.only(right: 13, left: 13),
@@ -110,9 +110,9 @@ class _NumberPageState extends State<NumberPage> {
                             minute = value;
                           });
                         },
-                        textStyle: Styles.text16()
+                        textStyle: Styles.text16(context)
                             .copyWith(color: AppColors.gray1TextColor),
-                        selectedTextStyle: Styles.text24(),
+                        selectedTextStyle: Styles.text24(context),
                         decoration: const BoxDecoration(
                           border: Border(
                               top: BorderSide(

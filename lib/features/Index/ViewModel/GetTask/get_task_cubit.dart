@@ -1,1 +1,1 @@
-import 'package:bloc/bloc.dart';import 'package:meta/meta.dart';part 'get_task_state.dart';class GetTaskCubit extends Cubit<GetTaskState> {  GetTaskCubit() : super(GetTaskInitial());}
+import 'package:bloc/bloc.dart';import 'package:meta/meta.dart';import 'package:uptodo/core/model/task_model.dart';part 'get_task_state.dart';class GetTaskCubit extends Cubit<GetTaskState> {  GetTaskCubit() : super(GetTaskInitial());  List<TaskModel> isCompleted = [];  List<TaskModel> isToday = [];  void getTasks()  {  }}
