@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/Network/serves_locator.dart';
-import 'features/TaskManagement/ViewModel/AddTask/add_task_cubit.dart';
+import 'features/TaskManagement/ViewModel/TaskCubit/task_management_cubit.dart';
 
 import 'config/themes/theme.dart';
 import 'features/Layout/View/Pages/layout_screen.dart';
@@ -21,10 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => AddTaskCubit()..filter()),
-        BlocProvider(
-          create: (context) => UserCubit(),
-        ),
+        BlocProvider(create: (context) => TaskManagementCubit()..filter()),
+        BlocProvider(create: (context) => UserCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
