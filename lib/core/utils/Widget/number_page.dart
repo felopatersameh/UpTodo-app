@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'custom_row.dart';
@@ -46,7 +47,7 @@ class _NumberPageState extends State<NumberPage> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Text(AppStrings.chooseTime, style: Styles.text16(context)),
+            child: Text(AppStrings.chooseTime, style: Styles.text16()),
           ),
           Divider(
             height: 5,
@@ -71,16 +72,16 @@ class _NumberPageState extends State<NumberPage> {
                         value: hour,
                         zeroPad: true,
                         infiniteLoop: true,
-                        itemWidth: MediaQuery.sizeOf(context).width * .15,
-                        itemHeight: MediaQuery.sizeOf(context).height * .05,
+                        itemWidth: 64.w,
+                        itemHeight: 40.h,
                         onChanged: (value) {
                           setState(() {
                             hour = value;
                           });
                         },
-                        textStyle: Styles.text16(context)
+                        textStyle: Styles.text16()
                             .copyWith(color: AppColors.gray1TextColor),
-                        selectedTextStyle: Styles.text24(context),
+                        selectedTextStyle: Styles.text24(),
                         decoration: const BoxDecoration(
                           border: Border(
                               top: BorderSide(
@@ -92,7 +93,7 @@ class _NumberPageState extends State<NumberPage> {
                     ),
                     Text(
                       ":",
-                      style: Styles.text20AppBar(context),
+                      style: Styles.text20AppBar(),
                     ),
                     Container(
                       margin: EdgeInsets.only(right: 13, left: 13),
@@ -103,16 +104,16 @@ class _NumberPageState extends State<NumberPage> {
                         value: minute,
                         zeroPad: true,
                         infiniteLoop: true,
-                        itemWidth: MediaQuery.sizeOf(context).width * .15,
-                        itemHeight: MediaQuery.sizeOf(context).height * .05,
+                        itemWidth: 64.w,
+                        itemHeight: 40.h,
                         onChanged: (value) {
                           setState(() {
                             minute = value;
                           });
                         },
-                        textStyle: Styles.text16(context)
+                        textStyle: Styles.text16()
                             .copyWith(color: AppColors.gray1TextColor),
-                        selectedTextStyle: Styles.text24(context),
+                        selectedTextStyle: Styles.text24(),
                         decoration: const BoxDecoration(
                           border: Border(
                               top: BorderSide(
@@ -122,63 +123,69 @@ class _NumberPageState extends State<NumberPage> {
                         ),
                       ),
                     ),
-                    Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              timeFormat = "AM";
-                            });
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 13, vertical: 14),
-                            decoration: BoxDecoration(
-                                color: timeFormat == "AM"
+                    Expanded(
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                timeFormat = "AM";
+                              });
+                            },
+                            child: Container(
+                              height: 55.h,
+                              width: 55.w,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 13, vertical: 14),
+                              decoration: BoxDecoration(
+                                  color: timeFormat == "AM"
+                                      ? Colors.grey.shade800
+                                      : Colors.grey.shade700,
+                                  border: Border.all(
+                                    color: timeFormat == "AM"
+                                        ? Colors.grey
+                                        : Colors.grey.shade700,
+                                  )),
+                              child: Text(
+                                "AM",
+                                textAlign: TextAlign.center,
+                                style: Styles.text16(),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                timeFormat = "PM";
+                              });
+                            },
+                            child: Container(
+                              height: 55.h,
+                              width: 55.w,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 13, vertical: 14),
+                              decoration: BoxDecoration(
+                                color: timeFormat == "PM"
                                     ? Colors.grey.shade800
                                     : Colors.grey.shade700,
                                 border: Border.all(
-                                  color: timeFormat == "AM"
+                                  color: timeFormat == "PM"
                                       ? Colors.grey
                                       : Colors.grey.shade700,
-                                )),
-                            child: const Text(
-                              "AM",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 25),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              timeFormat = "PM";
-                            });
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 13, vertical: 14),
-                            decoration: BoxDecoration(
-                              color: timeFormat == "PM"
-                                  ? Colors.grey.shade800
-                                  : Colors.grey.shade700,
-                              border: Border.all(
-                                color: timeFormat == "PM"
-                                    ? Colors.grey
-                                    : Colors.grey.shade700,
+                                ),
+                              ),
+                              child: Text(
+                                "PM",
+                                textAlign: TextAlign.center,
+                                style: Styles.text16(),
                               ),
                             ),
-                            child: const Text(
-                              "PM",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 25),
-                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -188,7 +195,6 @@ class _NumberPageState extends State<NumberPage> {
           Expanded(
             child: CustomRow(
               name: AppStrings.chooseTime,
-              height: .05,
               onTap: () {
                 if (timeFormat == "AM") {
                   if (hour == 12) {

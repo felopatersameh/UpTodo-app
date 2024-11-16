@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/Network/serves_locator.dart';
 import 'features/TaskManagement/ViewModel/TaskCubit/task_management_cubit.dart';
 
@@ -21,14 +22,27 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => TaskManagementCubit()..filter()),
-        BlocProvider(create: (context) => UserCubit()),
+        BlocProvider(
+          create: (context) => TaskManagementCubit()..filter(),
+        ),
+        BlocProvider(
+          create: (context) => UserCubit(),
+        ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.dark,
-        darkTheme: buildThemeDataDark(context),
-        home: const LayoutScreen(),
+      child: ScreenUtilInit(
+        designSize: const Size(375, 812),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        enableScaleWH: () => false,
+        enableScaleText: () => false,
+        builder: (context, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            themeMode: ThemeMode.dark,
+            darkTheme: buildThemeDataDark(context),
+            home: const LayoutScreen(),
+          );
+        },
       ),
     );
   }
