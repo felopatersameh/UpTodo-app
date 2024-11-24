@@ -1,0 +1,1 @@
+part of 'update_task_cubit.dart';@immutablesealed class UpdateTaskState {}final class UpdateTaskInitial extends UpdateTaskState {}class UpdateTasksSucceed extends UpdateTaskState {  final TaskModel model;  UpdateTasksSucceed(this.model);}

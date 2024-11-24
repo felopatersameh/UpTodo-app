@@ -1,1 +1,0 @@
-part of 'task_management_cubit.dart';@immutablesealed class TaskManagementState {}class CalendarInitial extends TaskManagementState {}class GetTasksSucceed extends TaskManagementState {  final List<TaskModel> model;  GetTasksSucceed(this.model);}class RemoveSucceed extends TaskManagementState {}class UpdateSucceed extends TaskManagementState {}
