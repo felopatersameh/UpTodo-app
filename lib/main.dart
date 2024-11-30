@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'core/Network/custom_notification_manager.dart';
+import 'core/Network/work_manager_notification.dart';
 import 'features/task/ViewModel/UpdateTask/update_task_cubit.dart';
 import 'core/Network/serves_locator.dart';
 import 'features/Index/ViewModel/GetTask/get_task_cubit.dart';
 import 'features/AddTask/ViewModel/AddTask/add_task_cubit.dart';
-
 import 'config/themes/theme.dart';
 import 'features/Layout/View/Pages/layout_screen.dart';
 import 'features/User/ViewModel/user_cubit.dart';
@@ -13,6 +14,11 @@ import 'features/User/ViewModel/user_cubit.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupService();
+  await Future.wait([
+    NotificationManager().initialize(),
+    WorkManagerNotification.init(),
+  ]);
+
   // Bloc.observer = MyBlocObserver();
 
   runApp(const MyApp());
@@ -23,6 +29,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    NotificationManager().notificationStream.listen(
+      (response) {
+        // if (response?.id != null) {
+        //   // Example: Navigate to a specific page
+        //   print('Navigating to page based on payload: $response');
+        //   // Navigator.pushNamed(context, '/details', arguments: payload);
+        // }
+      },
+    );
     return MultiBlocProvider(
       providers: [
         BlocProvider(
