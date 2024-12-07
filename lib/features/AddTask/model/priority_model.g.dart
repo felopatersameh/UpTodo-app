@@ -24,11 +24,9 @@ class PriorityModelAdapter extends TypeAdapter<PriorityModel> {
   @override
   void write(BinaryWriter writer, PriorityModel obj) {
     writer
-      ..writeByte(2)
-      ..writeByte(0)
-      ..write(obj.number)
       ..writeByte(1)
-      ..write(obj._flag);
+      ..writeByte(0)
+      ..write(obj.number);
   }
 
   @override

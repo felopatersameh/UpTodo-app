@@ -17,19 +17,21 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TaskModel(
+      id: fields[0] as String?,
       title: fields[1] as String,
       dateTime: fields[3] as DateTime,
       type: fields[5] as CategoryModel,
       priority: fields[6] as PriorityModel,
       description: fields[2] as String,
       isCompleted: fields[4] as bool,
+      idNotification: fields[7] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -43,7 +45,9 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       ..writeByte(5)
       ..write(obj.type)
       ..writeByte(6)
-      ..write(obj.priority);
+      ..write(obj.priority)
+      ..writeByte(7)
+      ..write(obj.idNotification);
   }
 
   @override

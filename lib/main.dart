@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/Network/custom_notification_manager.dart';
 import 'core/Network/work_manager_notification.dart';
+import 'features/task/View/Pages/task_screen.dart';
 import 'features/task/ViewModel/UpdateTask/update_task_cubit.dart';
 import 'core/Network/serves_locator.dart';
 import 'features/Index/ViewModel/GetTask/get_task_cubit.dart';
@@ -10,6 +11,8 @@ import 'features/AddTask/ViewModel/AddTask/add_task_cubit.dart';
 import 'config/themes/theme.dart';
 import 'features/Layout/View/Pages/layout_screen.dart';
 import 'features/User/ViewModel/user_cubit.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,8 +22,6 @@ void main() async {
     WorkManagerNotification.init(),
   ]);
 
-  // Bloc.observer = MyBlocObserver();
-
   runApp(const MyApp());
 }
 
@@ -29,15 +30,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NotificationManager().notificationStream.listen(
-      (response) {
-        // if (response?.id != null) {
-        //   // Example: Navigate to a specific page
-        //   print('Navigating to page based on payload: $response');
-        //   // Navigator.pushNamed(context, '/details', arguments: payload);
-        // }
-      },
-    );
+    // Listen to notifications and navigate
+    NotificationManager().notificationStream.listen((response) async {
+      if (response != null &&
+          response.payload != null &&
+          response.payload!.isNotEmpty) {
+        navigatorKey.currentState?.push(
+          MaterialPageRoute(
+            builder: (_) => TaskScreen(id: response.payload!),
+          ),
+        );
+      }
+    });
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -61,6 +66,7 @@ class MyApp extends StatelessWidget {
         enableScaleText: () => false,
         builder: (context, child) {
           return MaterialApp(
+            navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false,
             themeMode: ThemeMode.dark,
             darkTheme: buildThemeDataDark(context),

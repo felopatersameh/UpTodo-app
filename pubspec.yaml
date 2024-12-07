@@ -59,6 +59,8 @@ dependencies:
   flutter_timezone: ^3.0.1
   timezone: ^0.10.0
   workmanager: ^0.5.2
+  device_info_plus: ^11.1.1
+  flutter_settings_ui: ^3.0.1
 
 
 dev_dependencies:

@@ -8,10 +8,9 @@ class WorkManagerNotification {
   static Future<void> init() async {
     await Workmanager().initialize(
       actionTask,
-      isInDebugMode: true, // Set to false in production
+      isInDebugMode: false, // Set to false in production
     );
     await registerTask();
-    // print("WorkManager Initialized");
   }
 
   /// Register a task with unique name and input data
@@ -19,42 +18,45 @@ class WorkManagerNotification {
     // Cancel all previous tasks before scheduling a new one
     await Workmanager().cancelAll();
 
-    await Workmanager().registerOneOffTask(
-      "uniqueName", // Unique identifier for the task
-      "registerPeriodicTask",   // Task name
-      inputData: {
-        'int': 1,
-        'bool': true,
-        'double': 1.0,
-        'string': 'registerPeriodicTask',
-        'array': [1, 2, 3],
-      },
+    await Workmanager().registerPeriodicTask(
+      "dailyTaskReminder", "sendDailyReminders", // Task name
+      frequency: const Duration(days: 1),
+      // constraints: Constraints(
+      //   networkType: NetworkType.not_required,
+      //   requiresDeviceIdle: true,
+      // ),
+
     );
-    // print("Task Registered");
   }
 }
-@pragma('vm:entry-point') // Marks this function as a Dart entry-point
+
+@pragma('vm:entry-point')
 void actionTask() {
-  Workmanager().executeTask((taskName, inputData) async {
-    // print("TaskName: $taskName");
-    // print("InputData: $inputData");
+  Workmanager().executeTask(
+    (taskName, inputData) async {
+      try {
+        tz.initializeTimeZones();
 
-    try {
-      // Call NotificationManager to schedule a daily notification
-      tz.initializeTimeZones();
-      await NotificationManager().showScheduleDailyNotification(
-        id: 4,
-        title: "Reminder",
-        body: "This is your daily reminder!",
-        hour: 21, // Replace with desired hour
-        minute: 3, // Replace with desired minute
-      );
-      // print("Notification Scheduled Successfully");
-    } catch (err) {
-      // print("Error during task execution: ${err.toString()}");
-      return Future.value(false); // Task failed
-    }
+        await NotificationManager().showScheduleDailyNotification(
+          id: 1,
+          title: "Reminder for Today",
+          body: "Check your tasks for Today and plan ahead!",
+          hour: 7,
+          minute: 00,
+        );
 
-    return Future.value(true); // Task completed successfully
-  });
+        await NotificationManager().showScheduleDailyNotification(
+          id: 2,
+          title: "Complete Your Tasks",
+          body: "Don't forget to complete your tasks before their deadline!",
+          hour: 17,
+          minute: 00,
+        );
+
+        return Future.value(true);
+      } catch (err) {
+        return Future.value(false);
+      }
+    },
+  );
 }
