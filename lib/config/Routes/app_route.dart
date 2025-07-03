@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../features/Calendar/View/Pages/calendar_screen.dart';
 import '../../features/Focus/focus_screen.dart';
 import '../../features/Index/View/Pages/index_screen.dart';
-import '../../features/Setting/setting_screen.dart';
+import '../../features/Setting/View/Pages/setting_screen.dart';
 import '../../features/User/View/Pages/user_screen.dart';
 
 import '../../core/utils/Widget/image_view.dart';
@@ -49,7 +49,7 @@ class AppRoutes {
       final args = settings.arguments as String;
       return PageRouteBuilder(
         opaque: false,
-        pageBuilder: (BuildContext context, _, __) => ImageView(
+        pageBuilder: (BuildContext context, _, _) => ImageView(
           photo: args,
         ),
       );

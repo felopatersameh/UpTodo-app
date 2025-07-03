@@ -1,1 +1,1 @@
-class AppFormat {  static const String dateCompareTask = "E M";}
+class AppFormat {  static const String formatTimeTask = "";  static const String formatDayTask = "E M";  static const String formatDateTask = "yyyy-MM-dd";}

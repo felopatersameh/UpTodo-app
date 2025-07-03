@@ -1,0 +1,1 @@
+import 'package:flutter/material.dart';import '../Widget/build_app_bar_settings.dart';import '../Widget/build_settings_list.dart';class SettingScreen extends StatelessWidget {  const SettingScreen({super.key});  @override  Widget build(BuildContext context) {    return Scaffold(      appBar: BuildAppBarSettings(),      body: BuildSettingsList(),    );  }}

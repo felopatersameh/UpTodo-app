@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'core/Network/custom_notification_manager.dart';
-import 'core/Network/work_manager_notification.dart';
+import 'core/utils/Notifications/custom_notification_manager.dart';
 import 'features/task/View/Pages/task_screen.dart';
 import 'features/task/ViewModel/UpdateTask/update_task_cubit.dart';
 import 'core/Network/serves_locator.dart';
@@ -17,12 +16,10 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupService();
-  await Future.wait([
-    NotificationManager().initialize(),
-    WorkManagerNotification.init(),
-  ]);
 
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -30,11 +27,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Listen to notifications and navigate
     NotificationManager().notificationStream.listen((response) async {
       if (response != null &&
           response.payload != null &&
           response.payload!.isNotEmpty) {
+        await Future.delayed(const Duration(milliseconds: 500));
         navigatorKey.currentState?.push(
           MaterialPageRoute(
             builder: (_) => TaskScreen(id: response.payload!),
