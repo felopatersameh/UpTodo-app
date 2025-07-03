@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -79,7 +78,7 @@ Future<void> _openHiveBoxes() async {
     final dateTimeBox = await Hive.openBox<double>('notificationTimeRemimmber');
     getIt.registerSingleton<Box<double>>(dateTimeBox);
   } catch (e) {
-    log('Failed to open a Hive box: $e');
+    return;
   }
 }
 
@@ -116,6 +115,5 @@ Future<void> deleteLastMonthTasks() async {
 
   if (keysToDelete.isNotEmpty) {
     await taskBox.deleteAll(keysToDelete);
-    log('Deleted ${keysToDelete.length} tasks older than last month');
   }
 }

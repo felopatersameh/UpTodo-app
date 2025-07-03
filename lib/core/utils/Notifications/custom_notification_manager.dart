@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
@@ -41,12 +40,17 @@ class NotificationManager {
 
   static double getTimeReminder() {
     final notificationTimeReminderBox = getIt.get<Box<double>>();
-    final double notificationTimeReminder = notificationTimeReminderBox.get('notificationTimeReminder', defaultValue: 15) ?? 15;
-    return notificationTimeReminder ;
+    final double notificationTimeReminder =
+        notificationTimeReminderBox.get(
+          'notificationTimeReminder',
+          defaultValue: 15,
+        ) ??
+        15;
+    return notificationTimeReminder;
   }
 
   static final StreamController<NotificationResponse?>
-      notificationStreamController = StreamController.broadcast();
+  notificationStreamController = StreamController.broadcast();
 
   // Expose notification stream for app-wide access
   Stream<NotificationResponse?> get notificationStream =>
@@ -54,7 +58,10 @@ class NotificationManager {
 
   Future<void> initialize() async {
     final settingsBox = getIt.get<Box<bool>>();
-    final isNotificationPermissionGranted = settingsBox.get('isNotificationPermissionGranted', defaultValue: null);
+    final isNotificationPermissionGranted = settingsBox.get(
+      'isNotificationPermissionGranted',
+      defaultValue: null,
+    );
     if (isNotificationPermissionGranted == false) {
       return;
     }
@@ -94,8 +101,8 @@ class NotificationManager {
 
     // Handle permission status
     if (notificationStatus.isGranted) {
-        final settingsBox = getIt.get<Box<bool>>();
-        await settingsBox.put('isNotificationPermissionGranted', true);
+      final settingsBox = getIt.get<Box<bool>>();
+      await settingsBox.put('isNotificationPermissionGranted', true);
       return;
     }
     // } else if (notificationStatus.isDenied) {
@@ -133,7 +140,8 @@ class NotificationManager {
 
     await _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.createNotificationChannel(channel);
   }
 
@@ -189,12 +197,7 @@ class NotificationManager {
     String channelName = _defaultChannelName,
   }) async {
     final List<AndroidNotificationAction> androidActions = actions
-        .map(
-          (action) => AndroidNotificationAction(
-            action.id,
-            action.title,
-          ),
-        )
+        .map((action) => AndroidNotificationAction(action.id, action.title))
         .toList();
 
     final androidDetails = AndroidNotificationDetails(
@@ -270,9 +273,8 @@ class NotificationManager {
         matchDateTimeComponents: DateTimeComponents.time,
       );
 
-      log('Daily notification scheduled for ${scheduledTime.toString()}');
     } catch (e) {
-      log('Failed to schedule daily notification: $e');
+      return;
     }
   }
 
@@ -333,8 +335,9 @@ class NotificationManager {
   }) async {
     final notificationTimeReminder = getTimeReminder();
     tz.setLocalLocation(tz.getLocation("Africa/Cairo"));
-    final DateTime notificationTime =
-        scheduledTime.subtract(Duration(minutes:  notificationTimeReminder.toInt() ));
+    final DateTime notificationTime = scheduledTime.subtract(
+      Duration(minutes: notificationTimeReminder.toInt()),
+    );
     if (notificationTime.isBefore(tz.TZDateTime.now(tz.local))) {
       return;
     }
@@ -347,7 +350,6 @@ class NotificationManager {
       notificationTime.hour,
       notificationTime.minute,
     );
-    log("Running Date in : ${scheduledDate.toString()}");
 
     await _flutterLocalNotificationsPlugin.zonedSchedule(
       id,
@@ -370,7 +372,6 @@ class NotificationManager {
       //     UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-
     );
   }
 
@@ -396,17 +397,19 @@ class NotificationManager {
       tz.setLocalLocation(tz.getLocation("Africa/Cairo"));
 
       // Schedule notification 15 minutes before task
-      final DateTime notificationTime =
-          taskDateTime.subtract(const Duration(minutes: 15));
+      final DateTime notificationTime = taskDateTime.subtract(
+        const Duration(minutes: 15),
+      );
 
       // Don't schedule if the time has already passed
       if (notificationTime.isBefore(DateTime.now())) {
-        log('Task notification time has already passed');
         return;
       }
 
-      final tz.TZDateTime scheduledDate =
-          tz.TZDateTime.from(notificationTime, tz.local);
+      final tz.TZDateTime scheduledDate = tz.TZDateTime.from(
+        notificationTime,
+        tz.local,
+      );
 
       await _flutterLocalNotificationsPlugin.zonedSchedule(
         id,
@@ -431,10 +434,8 @@ class NotificationManager {
         //     UILocalNotificationDateInterpretation.absoluteTime,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       );
-
-      log('Task notification scheduled for ${scheduledDate.toString()}');
     } catch (e) {
-      log('Failed to schedule task notification: $e');
+      return;
     }
   }
 

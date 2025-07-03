@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:hive_flutter/hive_flutter.dart';
@@ -39,9 +38,7 @@ class AppDataExport {
       final file = File('${downloadsDirectory.path}/$fileName');
       await file.writeAsString(encryptedData);
 
-      log('Backup saved at ${file.path}');
     } catch (e) {
-      log('Error during export: $e');
       throw Exception('Failed to export data.');
     }
   }

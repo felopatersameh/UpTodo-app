@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'app_data_utils.dart';
@@ -36,10 +35,8 @@ class AppDataImport {
       //   await priorityBox.putAll(Map<String, dynamic>.from(data['priorityBox']));
       // }
 
-      log('Data successfully restored.');
     } catch (e) {
       // Log the error for debugging
-      log('Error during import: $e');
       throw Exception('Failed to import data.');
     }
   }
@@ -56,10 +53,8 @@ class AppDataImport {
         final file = File(result.files.single.path!);
         await AppDataImport.importData(file);
       } else {
-        log('No file selected.');
       }
     } catch (e) {
-      log('Error during restore: $e');
       throw Exception('Failed to restore data.');
     }
   }

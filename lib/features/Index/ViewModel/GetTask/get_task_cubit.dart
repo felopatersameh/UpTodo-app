@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -91,10 +90,8 @@ class GetTaskCubit extends Cubit<GetTaskState> {
     // taskIsRunning = [];
     final String dateTimeFormat =
         DateFormat(AppFormat.formatDateTask).format(selectedDateTime);
-    log(dateTimeFormat);
     final listRunning = taskModel.where(
       (element) {
-        log(element.dateTime.toString());
         return DateFormat(AppFormat.formatDateTask).format(element.dateTime) ==
                 dateTimeFormat &&
             element.isCompleted == false;

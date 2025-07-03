@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
@@ -77,7 +76,6 @@ class BuildSettingsList extends StatelessWidget {
                         ),
                         SettingsTile.switchTile(
                           onToggle: (value) async {
-                            log('value onToggle isCancelAll: $value');
                             await context
                                 .read<SettingCubit>()
                                 .allNotifications( value);
