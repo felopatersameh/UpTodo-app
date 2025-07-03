@@ -1,16 +1,18 @@
-# uptodo
+# Up ToDo
 
-A new Flutter project.
+## Project Description
 
-## Getting Started
+**uptodo** is a fully local Flutter application for organized monthly task management. The app allows users to add, categorize, and track their tasks throughout the month, all without requiring an internet connection. It features a clean interface, calendar-based task organization, and reliable local notifications to remind users of their tasks on time.
 
-This project is a starting point for a Flutter application.
+## Main Packages & Technologies
 
-A few resources to get you started if this is your first Flutter project:
+- **State Management:** bloc, flutter_bloc
+- **Local Database:** hive, hive_flutter
+- **Notifications & Scheduling:** flutter_local_notifications, workmanager, timezone
+- **Calendar UI:** table_calendar, easy_date_timeline
+- **UI & Design:** flutter_screenutil, google_fonts, font_awesome_flutter, persistent_bottom_nav_bar, flutter_settings_ui
+- **File & Image Handling:** image_picker, file_picker, permission_handler
+- **Localization & Dates:** intl, flutter_localizations
+- **Utilities:** get_it (dependency injection), uuid, device_info_plus, path_provider, crypto
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+For more details, check the `pubspec.yaml` file.

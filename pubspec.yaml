@@ -71,3 +71,8 @@ flutter:
     - Assets/Images/
 
 
+flutter_launcher_icons:
+  android: "launcher_icon"
+  image_path: "Assets/Png/ic_launcher_foreground.png"
+  adaptive_icon_background: "Assets/Png/ic_launcher_background.png"
+  adaptive_icon_foreground: "Assets/Png/ic_launcher_foreground.png"
